@@ -1,7 +1,7 @@
 const express = require("express")
 const hbs = require("hbs")
 const path = require("path")
-const checkSql = require("./db/sql")
+// const checkSql = require("./db/sql")
 let data = {}
 
 const app = express()
