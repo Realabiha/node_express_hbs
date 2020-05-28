@@ -1,5 +1,11 @@
 const env = process.env.NODE_ENV
-let SQL_CONF
+let SQL_CONF = {
+  host: 'localhost',
+  user: 'root',
+  password: 'XY1416567924mysql',
+  port: '3306',
+  database: 'myblog'
+}
 
 console.log(env, 'env')
 
