@@ -14,7 +14,7 @@ if(env === 'dev'){
 }
 if(env === 'production'){
   SQL_CONF = {
-    host: 'localhost',
+    host: '54.152.6.249',
     user: 'root',
     password: 'XY1416567924mysql',
     port: '3306',
