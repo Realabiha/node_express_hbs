@@ -1,51 +1,52 @@
+require("dotenv").config()
 const express = require("express")
 const hbs = require("hbs")
 const path = require("path")
+const monk = require("monk")
+const mongoose = require('mongoose')
+const db = require("./db/db")
 // const checkSql = require("./db/sql")
 let data = {}
 
 const app = express()
+app.use(express.json());
 
 // 使用hbs模板引擎
 app.set('view engine', 'hbs')
 // 拼接路径
 app.set('views', path.join(__dirname, 'views'))
 
-// getHomeData()
-
-const { Pool } = require('pg');
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
+const blogsSchema = new mongoose.Schema({
+    title: { type: String },
+    content: { type: String }
 });
+let blogsModel = db.model('blogs', blogsSchema);
 
-app.get('/db', async (req, res) => {
-  try {
-    const client = await pool.connect();
-    const result = await client.query('SELECT * FROM test_table');
-    const results = { 'results': (result) ? result.rows : null};
-    res.render('pages/db', results );
-    client.release();
-  } catch (err) {
-    console.error(err);
-    res.send("Error " + err);
+// blogsModel.create({
+//   title: 'test',
+//   content: 'hell0 mongodb!'
+// }, (err, res)=>{
+//   if(err){
+//     console.log('error: ', err)
+//   }else{
+//     console.log('res: ', res)
+//   }
+// })
+
+blogsModel.find((err, res)=>{
+  if(err){
+    console.log('error: ', err)
+  }else{
+    console.log('res: ', res)
+    data.list = res;
   }
 })
 
 
-app.get('/', (req, res, next) => {
-  console.log('home')
+app.get('/', (req, res) => {
+  console.log(blogsModel, 'home')
   res.render('home', data)
 })
 
-function getHomeData(){
-  const query = 'select * from blogs'
-  return checkSql(query).then(res => {
-    data.list = res
-  })
- 
-}
 
 module.exports = app
