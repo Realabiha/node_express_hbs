@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WTF</title>
+</head>
+<style>
+  html, body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-image: linear-gradient(to bottom, #000, #fff);
+  }
+
+  header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    box-sizing: border-box;
+    background: #ccc;
+    box-shadow: 2px 2px 2px #000;
+  }
+  header img{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  header span:hover{
+    font-weight: bold;
+  }
+  main{
+    width: 100%;
+    height: auto;
+  }
+  .login{
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
+    border-radius: 5px;
+  }
+  .logo img{
+    display: block;
+    max-width: 150px;
+    margin: 0 auto;
+  }
+  .main-form {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin: 0 auto;
+   
+  }
+  .main-form input {
+    width: 70%;
+    height: 30px;
+    margin-top: 20px;
+    font-size: 20px;
+    text-align: center;
+    border: none;
+    outline: none;
+  }
+  .main-form textarea {
+    width: 70%;
+    height: 130px;
+    margin-top: 20px;
+    font-size: 20px;
+    /* text-align: center; */
+    border: none;
+    outline: none;
+  }
+
+  .main-form button {
+    display: block;
+    width: 70%;
+    height: 30px;
+    margin: 20px auto;
+    font-size: 20px;
+    padding: 1px;
+    box-sizing: content-box;
+    border: none;
+    outline: none;
+  }
+  footer{
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 50px;
+  }
+</style>
+
+<body>
+  <header>
+    <div>
+      <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="">
+    </div>
+    <div>
+      <span>HOME</span>
+      <span> | </span>
+      <span>SEND</span>
+      <span> | </span>
+      <span>OUT</span>
+    </div>
+  </header>
+  <main>
+    <div class="login">
+      <form class="main-form">
+        <input type="text" name="title" />
+        <textarea type="text" name="content"></textarea>
+        <button>SUBMIT</button>
+      </form>
+    </div>
+  </main>
+  <footer>© 2020 Abiha.com </footer>
+  <script>
+    console.log('hello word')
+    const BASE_API = 'http://localhost:8686/api'
+    const form = document.querySelector('.main-form')
+    let send
+   
+   form.onsubmit = async e => {
+      e.preventDefault()
+      const formData = new FormData(form);
+      const title = formData.get('title')
+      const content = formData.get('content')
+      if (title.trim() && content.trim()) {
+        send = {
+          method: 'post',
+          body: JSON.stringify({ title, content }),
+          headers: {
+            'content-type': 'application/json'
+          }
+        }
+      } else {
+        window.alert("TITLE AND CONTENT ARE REQUIRED")
+        return;
+      }
+      const response = await fetch(`${BASE_API}/blog/add`, send)
+      const {code, msg} = await response.json()
+      window.alert(msg)
+      if(code == 1){
+        location.href = `${BASE_API}/blog/list`
+        form.reset()
+      } 
+   }
+  </script>
+</body>
+
+</html>

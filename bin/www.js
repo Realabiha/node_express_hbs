@@ -1,10 +1,9 @@
 const app = require("../app")
-const env = process.env.NODE_ENV;
 const port = process.env.PORT || 8686
 
 
-app.listen(port, serverRunning)
+app.listen(port, running)
 
-function serverRunning(){
+function running(){
   console.log('serer running >-<', port)
 }
