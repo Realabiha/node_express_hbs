@@ -5,6 +5,7 @@ const path = require("path")
 const fs = require("fs")
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
+const cors = require("cors")
 // const checkSql = require("./db/sql")
 let data = {}
 
@@ -12,6 +13,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
+app.use(cors())
 
 // router
 const indexRouter = require('./routes/index')
