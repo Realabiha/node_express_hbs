@@ -132,7 +132,7 @@
   <footer>© 2020 Abiha.com </footer>
   <script>
     console.log('hello word')
-    const BASE_API = 'http://localhost:8686/api'
+    const BASE_API = location.href.indexOf('http://localhost:8686') >= 0 ? 'http://localhost:8686/api' : 'https://protected-dawn-03047.herokuapp.com/api'
     const form = document.querySelector('.main-form')
     let send
    
