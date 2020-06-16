@@ -2,7 +2,9 @@ const db = require("./conf")
 const mongoose = require("mongoose")
 const blogsSchema = new mongoose.Schema({
     title: { type: String },
-    content: { type: String }
+    content: { type: String },
+    user: {type: String},
+    time: {type: String}
 });
 let blogsModel = db.model('blogs', blogsSchema);
 

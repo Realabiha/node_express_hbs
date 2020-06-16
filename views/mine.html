@@ -91,7 +91,7 @@
       </a>
     </div>
     <div>
-      <a href="/api/blog/mine">Mine</a>
+      <a href="/api/blog/list">Home</a>
       <span> | </span>
       <a href="/api/blog/add">Send</a>
     </div>
@@ -103,7 +103,7 @@
           <h3>{{this.title}}</h3>
           <p>{{this.content}}</p>
           <p>
-            用户<span style="color: #60467e">{{this.user}}</span>发表于{{this.time}}
+            <span style="color: #60467e">{{this.time}}</span>
           </p>
         </li>
       {{/each}}
@@ -111,9 +111,4 @@
   </main>
   <footer>© 2020 Abiha.com </footer>
 </body>
-<script>
-  const mine = document.getElementsByClassName('mine')[0];
-  const send = document.getElementsByClassName('send')[0];
-  const out = document.getElementsByClassName('out')[0];
-</script>
 </html>

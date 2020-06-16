@@ -17,9 +17,10 @@ router.get('/list', (req, res, next) => {
 router.get('/add', (req, res, next) => {
   res.render('send')
 })
-
 router.post('/add', (req, res, next) => {
-  const {body} = req
+  const {body, cookies} = req;
+  body.user = cookies.LOGIN_SESSION;
+  body.time = new Date();
   blogsModel.create(body, (error, result)=>{
     if(error){
       res.json({
@@ -33,5 +34,17 @@ router.post('/add', (req, res, next) => {
       msg: 'SEND SUCCESS'
     })
   })
+})
+router.get('/mine', async (req, res, next) => {
+  const {cookies} = req;
+  const list = await blogsModel.find({"user": cookies.LOGIN_SESSION});
+  if(list){
+    res.render('mine', {list});
+  }else{
+    res.json({
+      code: -1,
+      msg: 'No Record'
+    })
+  }
 })
 module.exports = router

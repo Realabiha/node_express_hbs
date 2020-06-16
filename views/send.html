@@ -18,7 +18,9 @@
     padding: 0;
     background-image: linear-gradient(to bottom, #000, #fff);
   }
-
+  a{
+    text-decoration: none;
+  }
   header{
     position: fixed;
     left: 0;
@@ -110,14 +112,14 @@
 <body>
   <header>
     <div>
-      <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="">
+      <a href="/">
+        <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="">
+      </a>
     </div>
     <div>
-      <span>HOME</span>
+      <a href="/api/blog/mine">Mine</a>
       <span> | </span>
-      <span>SEND</span>
-      <span> | </span>
-      <span>OUT</span>
+      <a href="/api/blog/add">Send</a>
     </div>
   </header>
   <main>
@@ -132,15 +134,17 @@
   <footer>© 2020 Abiha.com </footer>
   <script>
     console.log('hello word')
-    const BASE_API = location.href.indexOf('http://localhost:8686') >= 0 ? 'http://localhost:8686/api' : 'https://protected-dawn-03047.herokuapp.com/api'
+    const BASE_API = location.hostname == 'localhost' ? 'http://localhost:8686/api' : 'https://protected-dawn-03047.herokuapp.com/api'
     const form = document.querySelector('.main-form')
-    let send
+    let send, flag = false;
    
    form.onsubmit = async e => {
+      if(flag) return;
+      flag = true;
       e.preventDefault()
       const formData = new FormData(form);
-      const title = formData.get('title')
-      const content = formData.get('content')
+      const title = formData.get('title');
+      const content = formData.get('content');
       if (title.trim() && content.trim()) {
         send = {
           method: 'post',
@@ -150,6 +154,7 @@
           }
         }
       } else {
+        flag = false;
         window.alert("TITLE AND CONTENT ARE REQUIRED")
         return;
       }
@@ -160,6 +165,7 @@
         location.href = `${BASE_API}/blog/list`
         form.reset()
       } 
+      flag = false;
    }
   </script>
 </body>

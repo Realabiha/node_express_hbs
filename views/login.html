@@ -18,7 +18,6 @@
     padding: 0;
     background-image: linear-gradient(to bottom, #000, #fff);
   }
-
   header {
     position: fixed;
     left: 0;
@@ -48,13 +47,13 @@
     display: block;
     max-width: 150px;
     margin: 0 auto;
+    padding-bottom: 50px;
   }
   .main-form {
     width: 100%;
     height: auto;
     text-align: center;
     margin: 0 auto;
-   
   }
   .main-form input {
     width: 70%;
@@ -76,6 +75,13 @@
     box-sizing: content-box;
     border: none;
     outline: none;
+  }
+  .main-color{
+    color: #000;
+    font-weight: bold;
+  }
+  .main-color:hover{
+    cursor: pointer;
   }
   footer{
     position: fixed;
@@ -101,18 +107,40 @@
       <form class="main-form">
         <input type="text" name="account" placeholder="ACCOUNT">
         <input type="text" name="password" placeholder="PASSWORD">
-        <button>SUBMIT</button>
+        <button>Log In</button>
+        <button style="display: none">Sign Up</button>
+        <div class="sign-up">
+          <span class="main-color">Log In</span>
+          |
+          <span class="main-color">Sign Up</span>
+        </div>
       </form>
     </div>
   </main>
   <footer>© 2020 Abiha.com </footer>
   <script>
     console.log('hello word', location.href)
-    const BASE_API = location.href.indexOf('http://localhost:8686') >= 0 ? 'http://localhost:8686/api' : 'https://protected-dawn-03047.herokuapp.com/api'
+    const BASE_API = location.hostname == 'localhost' ? 'http://localhost:8686/api' : 'https://protected-dawn-03047.herokuapp.com/api'
     const form = document.querySelector('.main-form')
-    let send
-   
-   form.onsubmit = async e => {
+    const logIn = document.getElementsByClassName('main-color')[0];
+    const signUp = document.getElementsByClassName('main-color')[1];
+    const sub = document.getElementsByTagName('button')[0];
+    const sign = document.getElementsByTagName('button')[1];
+    let send, flag = false;
+    // bind click event
+    signUp.onclick = e => {
+      sub.style.display = 'none';
+      sign.style.display = 'block';
+    }
+    logIn.onclick = e => {
+      sub.style.display = 'block';
+      sign.style.display = 'none';        
+    }
+
+    // submit form
+    form.onsubmit = async e => {
+      if(flag) return;
+      flag = true;
       e.preventDefault()
       const formData = new FormData(form);
       const account = formData.get('account')
@@ -126,17 +154,19 @@
           }
         }
       } else {
-        window.alert("ACCOUNT AND PASSWORD ARE REQUIRED")
+        flag = false;
+        window.alert("ACCOUNT AND PASSWORD ARE REQUIRED");
         return;
       }
-      const response = await fetch(`${BASE_API}/user/login`, send)
-      const {code, msg} = await response.json()
-      window.alert(msg)
+      const response = await fetch(`${BASE_API}/user/login`, send);
+      const {code, data, msg} = await response.json();
+      window.alert(msg);
       if(code == 1){
-        location.href += 'api/blog/list'
-        form.reset()
+        location.href += 'api/blog/list';
+        form.reset();
       } 
-   }
+      flag = false;
+    }
   </script>
 </body>
 
