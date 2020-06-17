@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>WTF</title>
+  <title>Document</title>
 </head>
 <style>
   html, body {
@@ -83,6 +83,12 @@
   .main-color:hover{
     cursor: pointer;
   }
+  .sign-up span{
+    color: #aaa;
+  }
+  .sign-up span:hover{
+    color: #000;
+  }
   footer{
     position: fixed;
     left: 0;
@@ -105,10 +111,10 @@
     </div>
     <div class="login">
       <form class="main-form">
-        <input type="text" name="account" placeholder="ACCOUNT">
-        <input type="text" name="password" placeholder="PASSWORD">
-        <button>Log In</button>
-        <button style="display: none">Sign Up</button>
+        <input type="text" name="account" placeholder="账号">
+        <input type="text" name="password" placeholder="密码">
+        <button>登录</button>
+        <button style="display: none">注册</button>
         <div class="sign-up">
           <span class="main-color">Log In</span>
           |
@@ -169,5 +175,4 @@
     }
   </script>
 </body>
-
 </html>

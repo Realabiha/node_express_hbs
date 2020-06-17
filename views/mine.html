@@ -62,6 +62,18 @@
     padding: 0;
     margin: 0;
     list-style-type: none;
+    padding: 10px;
+    margin: 10px 0;
+    background: #eee;
+    box-shadow: 2px 2px 2px #eee;
+    border-radius: 5px;
+  }
+  main ul li:hover{
+    background: #fff;
+  }
+  .sign{
+    color: #ccc;
+    font-size: 14px;
   }
   main ul::-webkit-scrollbar{
     display: none;
@@ -87,13 +99,13 @@
   <header>
     <div>
       <a href="/">
-        <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="">
+        <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="退出登录" title="退出登录">
       </a>
     </div>
     <div>
-      <a href="/api/blog/list">Home</a>
+      <a href="/api/blog/list">主页</a>
       <span> | </span>
-      <a href="/api/blog/add">Send</a>
+      <a href="/api/blog/add">分享</a>
     </div>
   </header>
   <main>
@@ -102,7 +114,7 @@
         <li>
           <h3>{{this.title}}</h3>
           <p>{{this.content}}</p>
-          <p>
+          <p class="sign">
             <span style="color: #60467e">{{this.time}}</span>
           </p>
         </li>

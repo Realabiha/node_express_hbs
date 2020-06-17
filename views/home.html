@@ -62,6 +62,18 @@
     padding: 0;
     margin: 0;
     list-style-type: none;
+    padding: 10px;
+    margin: 10px 0;
+    background: #eee;
+    box-shadow: 2px 2px 2px #eee;
+    border-radius: 5px;
+  }
+  main ul li:hover{
+    background: #fff;
+  }
+  .sign{
+    color: #ccc;
+    font-size: 14px;
   }
   main ul::-webkit-scrollbar{
     display: none;
@@ -87,22 +99,25 @@
   <header>
     <div>
       <a href="/">
-        <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="">
+        <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3296148637,835878443&fm=15&gp=0.jpg" alt="退出登录" title="退出登录">
       </a>
     </div>
     <div>
-      <a href="/api/blog/mine">Mine</a>
+      <a href="/api/blog/mine">我的</a>
       <span> | </span>
-      <a href="/api/blog/add">Send</a>
+      <a href="/api/blog/add">分享</a>
     </div>
+    <!-- <div class="user">
+      <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1592377731852&di=cfc2fa3f009914672201951013e4e4c4&imgtype=0&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D397385748%2C3693940230%26fm%3D214%26gp%3D0.jpg" alt="">     
+    </div> -->
   </header>
   <main>
-    <ul>
+    <ul class="blog-wrap">
       {{#each list}}
-        <li>
-          <h3>{{this.title}}</h3>
-          <p>{{this.content}}</p>
-          <p>
+        <li class="blog-item">
+          <h3 class="title">{{this.title}}</h3>
+          <p class="content">{{this.content}}</p>
+          <p class="sign">
             用户<span style="color: #60467e">{{this.user}}</span>发表于{{this.time}}
           </p>
         </li>

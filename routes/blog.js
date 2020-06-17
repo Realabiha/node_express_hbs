@@ -10,7 +10,7 @@ router.get('/list', (req, res, next) => {
       })
       return;
     }
-    res.render('home', {list: result})
+    res.render('home', {list: result && result.reverse()})
   })
   
 })
